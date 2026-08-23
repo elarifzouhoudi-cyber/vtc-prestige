@@ -198,7 +198,7 @@
       inset: 0;
       background-image:
         linear-gradient(180deg, rgba(6,6,8,.50) 0%, rgba(6,6,8,.18) 35%, rgba(6,6,8,.62) 75%, rgba(6,6,8,1) 100%),
-        url('https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1920&q=85');
+        url('img/hero-marseille.jpg');
       background-size: cover;
       background-position: center 20%;
       transform: scale(1.06);
@@ -330,6 +330,31 @@
       border-color: var(--gold);
       color: var(--gold);
       transform: translateY(-2px);
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      background: #25D366;
+      color: #fff;
+      padding: .9rem 2.2rem;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-whatsapp svg { width: 18px; height: 18px; fill: #fff; flex-shrink: 0; }
+    .btn-whatsapp:hover {
+      background: #1fb956;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(37,211,102,.35);
     }
 
     .hero-scroll {
@@ -523,11 +548,13 @@
       transform: scale(1.03);
     }
     .fleet-img.tesla-img {
-      object-fit: cover;
-      filter: saturate(.75) brightness(.85);
+      object-fit: contain;
+      background: radial-gradient(ellipse at center, #f2ede1 0%, #e2d9c2 100%);
+      padding: 1.2rem;
+      filter: none;
     }
     .fleet-card:hover .tesla-img {
-      filter: saturate(.95) brightness(.95);
+      filter: none;
       transform: scale(1.03);
     }
     .fleet-img-wrap { overflow: hidden; }
@@ -1273,7 +1300,7 @@
       <li><a href="#" onclick="showPage('zones')"    class="menu-link" data-page="zones">Zones Desservies</a></li>
     </ul>
     <div class="menu-footer">
-      <a href="#">+33 6 00 00 00 00</a>
+      <a href="tel:+33658500439">06 58 50 04 39</a>
       <a href="#">Instagram</a>
       <a href="#">Mentions légales</a>
     </div>
@@ -1295,11 +1322,12 @@
         <div class="hero-cta">
           <a href="#" class="btn-primary" onclick="showPage('reservation')">Réserver un trajet</a>
           <a href="#" class="btn-outline" onclick="showPage('flotte')">Découvrir la flotte</a>
+          <a href="tel:+33658500439" class="btn-whatsapp"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>06 58 50 04 39</a>
         </div>
       </div>
       <div class="hero-location">
         <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>Marseille — Cathédrale La Major</span>
+        <span>Marseille — Notre-Dame de la Garde</span>
       </div>
       <div class="hero-scroll">
         <div class="scroll-line"></div>
@@ -1450,8 +1478,9 @@
     <section class="cta-band">
       <div class="section-label reveal">Réservation</div>
       <h2 class="reveal d1">Prêt à vivre une expérience<br/>de transport <em>hors du commun ?</em></h2>
-      <div class="reveal d2">
+      <div class="reveal d2" style="display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap">
         <a href="#" class="btn-primary" onclick="showPage('reservation')">Réserver maintenant</a>
+        <a href="tel:+33658500439" class="btn-whatsapp"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>06 58 50 04 39</a>
       </div>
     </section>
 
@@ -1488,7 +1517,7 @@
           <div class="footer-col">
             <div class="footer-col-title">Contact</div>
             <ul>
-              <li><a href="#">+33 6 00 00 00 00</a></li>
+              <li><a href="tel:+33658500439">06 58 50 04 39</a></li>
               <li><a href="#">contact@prestigeride.fr</a></li>
               <li><a href="#">Marseille & région PACA</a></li>
               <li><a href="#" onclick="showPage('reservation')">Réservation</a></li>
@@ -1550,7 +1579,10 @@
     <section class="cta-band">
       <div class="section-label reveal">Rejoignez-nous</div>
       <h2 class="reveal d1">Faites l'expérience du <em>transport d'exception</em></h2>
-      <div class="reveal d2"><a href="#" class="btn-primary" onclick="showPage('reservation')">Réserver maintenant</a></div>
+      <div class="reveal d2" style="display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap">
+        <a href="#" class="btn-primary" onclick="showPage('reservation')">Réserver maintenant</a>
+        <a href="tel:+33658500439" class="btn-whatsapp"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>06 58 50 04 39</a>
+      </div>
     </section>
     <footer>
       <div class="footer-inner">
@@ -1624,7 +1656,10 @@
     <section class="cta-band">
       <div class="section-label reveal">Contactez-nous</div>
       <h2 class="reveal d1">Un service <em>sur mesure</em><br/>pour chaque besoin</h2>
-      <div class="reveal d2"><a href="#" class="btn-primary" onclick="showPage('reservation')">Demander un devis</a></div>
+      <div class="reveal d2" style="display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap">
+        <a href="#" class="btn-primary" onclick="showPage('reservation')">Demander un devis</a>
+        <a href="tel:+33658500439" class="btn-whatsapp"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>06 58 50 04 39</a>
+      </div>
     </section>
     <footer>
       <div class="footer-inner">
@@ -1648,18 +1683,18 @@
         </p>
         <div class="fleet-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
 
-          <!-- Tesla Model S Noire -->
+          <!-- Tesla Model Y Noire -->
           <div class="fleet-card reveal d1">
             <div class="fleet-img-wrap">
               <div class="fleet-shimmer"></div>
               <img class="fleet-img tesla-img"
-                src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800&q=85"
-                alt="Tesla Model S Noire" />
+                src="img/tesla-model-y.png"
+                alt="Tesla Model Y Noire" />
             </div>
             <div class="fleet-body">
               <div class="fleet-badge">Électrique · Prestige</div>
-              <h3 class="fleet-name">Tesla Model S</h3>
-              <p class="fleet-desc">Technologie de pointe, silencieuse et puissante. Autonomie exceptionnelle, habitacle futuriste, autopilot avancé. Noir laqué, intérieur cuir sombre.</p>
+              <h3 class="fleet-name">Tesla Model Y</h3>
+              <p class="fleet-desc">Technologie de pointe, silencieuse et puissante. Autonomie exceptionnelle, habitacle futuriste, autopilot avancé. SUV noir laqué, intérieur cuir sombre.</p>
               <div class="fleet-specs">
                 <div class="fleet-spec">
                   <span class="fleet-spec-val">4</span>
@@ -1741,7 +1776,10 @@
     <section class="cta-band">
       <div class="section-label reveal">Embarquement</div>
       <h2 class="reveal d1">Choisissez votre véhicule<br/>et <em>réservez en ligne</em></h2>
-      <div class="reveal d2"><a href="#" class="btn-primary" onclick="showPage('reservation')">Réserver maintenant</a></div>
+      <div class="reveal d2" style="display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap">
+        <a href="#" class="btn-primary" onclick="showPage('reservation')">Réserver maintenant</a>
+        <a href="tel:+33658500439" class="btn-whatsapp"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>06 58 50 04 39</a>
+      </div>
     </section>
     <footer>
       <div class="footer-inner">
@@ -1773,8 +1811,9 @@
             </ul>
             <div style="margin-top:2.5rem">
               <div class="section-label" style="margin-bottom:1rem">Contact Direct</div>
-              <p style="font-size:1.4rem;font-family:var(--font-serif);color:var(--gold)">+33 6 00 00 00 00</p>
+              <p style="font-size:1.4rem;font-family:var(--font-serif);color:var(--gold)"><a href="tel:+33658500439" style="color:inherit;text-decoration:none">06 58 50 04 39</a></p>
               <p style="font-size:.85rem;color:var(--gray-3);margin-top:.4rem">Réponse assurée en moins de 15 minutes</p>
+              <a href="tel:+33658500439" class="btn-whatsapp" style="margin-top:1.2rem"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>Appeler maintenant</a>
             </div>
           </div>
           <div class="reveal-right">
@@ -1823,7 +1862,7 @@
                   <div class="form-group">
                     <label>Véhicule souhaité</label>
                     <select>
-                      <option>Tesla Model S (Noire)</option>
+                      <option>Tesla Model Y (Noire)</option>
                       <option>Mercedes Vito Van (Noir)</option>
                       <option>Mercedes Classe C (Noire)</option>
                     </select>
@@ -1887,7 +1926,7 @@
               </div>
               <div>
                 <div class="contact-item-label">Téléphone</div>
-                <div class="contact-item-val">+33 6 00 00 00 00</div>
+                <div class="contact-item-val"><a href="tel:+33658500439" style="color:inherit;text-decoration:none">06 58 50 04 39</a></div>
               </div>
             </div>
             <div class="contact-item reveal d2">
@@ -1918,6 +1957,7 @@
               </div>
             </div>
             <div>
+              <a href="tel:+33658500439" class="btn-whatsapp" style="margin-bottom:2rem"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>Appeler maintenant</a>
               <div class="contact-item-label" style="margin-bottom:.8rem">Suivez-nous</div>
               <div class="contact-socials">
                 <a href="#" class="social-btn" aria-label="Instagram">
@@ -2081,7 +2121,10 @@
 
         <div style="text-align:center;margin-top:4rem" class="reveal">
           <p style="color:var(--gray-2);font-size:.9rem;margin-bottom:2rem">Votre ville n'est pas dans la liste ? Contactez-nous pour un devis personnalisé.</p>
-          <a href="#" class="btn-primary" onclick="showPage('reservation')">Demander un devis</a>
+          <div style="display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap">
+            <a href="#" class="btn-primary" onclick="showPage('reservation')">Demander un devis</a>
+            <a href="tel:+33658500439" class="btn-whatsapp"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>06 58 50 04 39</a>
+          </div>
         </div>
       </div>
     </section>
@@ -2246,7 +2289,7 @@
       if (hero) {
         const img = new Image();
         img.onload = () => hero.classList.add('loaded');
-        img.src = 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1920&q=85';
+        img.src = 'img/hero-marseille.jpg';
       }
     }
 
