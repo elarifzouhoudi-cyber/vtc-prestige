@@ -607,7 +607,8 @@
     }
     .fleet-img {
       width: 100%;
-      height: 220px;
+      height: 100%;
+      flex-shrink: 0;
       object-fit: cover;
       display: block;
       filter: saturate(.7) brightness(.85);
@@ -617,18 +618,53 @@
       filter: saturate(.9) brightness(.95);
       transform: scale(1.03);
     }
-    .fleet-img-wrap.tesla-split {
+    .fleet-img-wrap { overflow: hidden; height: 220px; }
+    .carousel-track {
       display: flex;
-      height: 220px;
-    }
-    .fleet-img-wrap.tesla-split .fleet-img {
-      width: 50%;
       height: 100%;
+      transition: transform .5s cubic-bezier(.22,1,.36,1);
     }
-    .fleet-img-wrap.tesla-split .fleet-img:first-child {
-      border-right: 2px solid var(--bg-card);
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: rgba(6,6,8,.55);
+      border: 1px solid rgba(201,168,76,.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 3;
+      padding: 0;
+      backdrop-filter: blur(4px);
+      transition: background var(--transition), border-color var(--transition);
     }
-    .fleet-img-wrap { overflow: hidden; }
+    .carousel-arrow svg { width: 13px; height: 13px; stroke: var(--gold); fill: none; stroke-width: 2.2; }
+    .carousel-arrow:hover { background: var(--gold); border-color: var(--gold); }
+    .carousel-arrow:hover svg { stroke: var(--bg-deep); }
+    .carousel-prev { left: .7rem; }
+    .carousel-next { right: .7rem; }
+    .carousel-dots {
+      position: absolute;
+      bottom: .7rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: .4rem;
+      z-index: 3;
+    }
+    .carousel-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.45);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .carousel-dot.active { background: var(--gold); transform: scale(1.35); }
     .fleet-body { padding: 2rem; }
     .fleet-badge {
       display: inline-block;
@@ -1075,8 +1111,9 @@
       .services-grid { grid-template-columns: 1fr; }
       .form-card { padding: 1.8rem 1.2rem; }
       .fleet-grid { max-width: 100%; }
-      .fleet-img { height: 190px; }
-      .fleet-img-wrap.tesla-split { height: 190px; }
+      .fleet-img-wrap { height: 190px; }
+      .carousel-arrow { width: 26px; height: 26px; }
+      .carousel-arrow svg { width: 11px; height: 11px; }
       .menu-nav-list a { font-size: clamp(1.6rem, 7vw, 2.8rem); }
       .btn-primary, .btn-outline, .btn-whatsapp { padding: .8rem 1.8rem; font-size: .75rem; width: 100%; text-align: center; justify-content: center; }
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -1457,14 +1494,6 @@
           <div class="service-card reveal d3">
             <span class="service-num">03</span>
             <div class="service-icon">
-              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </div>
-            <h3 class="service-title">Mariage & Événements</h3>
-            <p class="service-desc">Sublimez vos moments inoubliables avec une arrivée raffinée et un véhicule impeccablement présenté.</p>
-          </div>
-          <div class="service-card reveal d4">
-            <span class="service-num">04</span>
-            <div class="service-icon">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <h3 class="service-title">Mise à Disposition</h3>
@@ -1552,7 +1581,6 @@
             <ul>
               <li><a href="#">Transfert Aéroport</a></li>
               <li><a href="#">Voyages Affaires</a></li>
-              <li><a href="#">Mariages</a></li>
               <li><a href="#">Mise à Disposition</a></li>
             </ul>
           </div>
@@ -1662,29 +1690,21 @@
           <div class="service-card reveal d3">
             <span class="service-num">03</span>
             <div class="service-icon">
-              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </div>
-            <h3 class="service-title">Mariages & Cérémonies</h3>
-            <p class="service-desc">Décoration florale optionnelle, véhicule nettoyé et parfumé, chauffeur en tenue de gala.</p>
-          </div>
-          <div class="service-card reveal d4">
-            <span class="service-num">04</span>
-            <div class="service-icon">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <h3 class="service-title">Mise à Disposition</h3>
             <p class="service-desc">Votre chauffeur personnel à l'heure — courses, rendez-vous multiples, journée complète.</p>
           </div>
-          <div class="service-card reveal d1">
-            <span class="service-num">05</span>
+          <div class="service-card reveal d4">
+            <span class="service-num">04</span>
             <div class="service-icon">
               <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
             <h3 class="service-title">Groupes & Séminaires</h3>
             <p class="service-desc">Transport de groupes professionnels avec coordination et plusieurs véhicules si nécessaire.</p>
           </div>
-          <div class="service-card reveal d2">
-            <span class="service-num">06</span>
+          <div class="service-card reveal d1">
+            <span class="service-num">05</span>
             <div class="service-icon">
               <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             </div>
@@ -1725,14 +1745,18 @@
 
           <!-- Tesla Model 3 Noire -->
           <div class="fleet-card reveal d1">
-            <div class="fleet-img-wrap tesla-split">
+            <div class="fleet-img-wrap">
               <div class="fleet-shimmer"></div>
-              <img class="fleet-img"
-                src="img/tesla-model-3-exterieur.jpg"
-                alt="Tesla Model 3 Noire — extérieur" />
-              <img class="fleet-img"
-                src="img/tesla-model-3-interieur.jpg"
-                alt="Tesla Model 3 Noire — intérieur" />
+              <div class="carousel-track">
+                <img class="fleet-img" src="img/tesla-model-3-exterieur.jpg" alt="Tesla Model 3 Noire — extérieur" />
+                <img class="fleet-img" src="img/tesla-model-3-interieur.jpg" alt="Tesla Model 3 Noire — intérieur" />
+              </div>
+              <button class="carousel-arrow carousel-prev" type="button" aria-label="Photo précédente"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button class="carousel-arrow carousel-next" type="button" aria-label="Photo suivante"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+              <div class="carousel-dots">
+                <button class="carousel-dot active" type="button" aria-label="Photo 1"></button>
+                <button class="carousel-dot" type="button" aria-label="Photo 2"></button>
+              </div>
             </div>
             <div class="fleet-body">
               <div class="fleet-badge">Électrique · Prestige</div>
@@ -1759,9 +1783,14 @@
           <div class="fleet-card reveal d2">
             <div class="fleet-img-wrap">
               <div class="fleet-shimmer"></div>
-              <img class="fleet-img"
-                src="https://source.unsplash.com/700x420/?mercedes,vito,van,black,dark"
-                alt="Mercedes Vito Van Noir" />
+              <div class="carousel-track">
+                <img class="fleet-img" src="https://source.unsplash.com/700x420/?mercedes,vito,van,black,dark" alt="Mercedes Vito Van Noir" />
+              </div>
+              <button class="carousel-arrow carousel-prev" type="button" aria-label="Photo précédente"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button class="carousel-arrow carousel-next" type="button" aria-label="Photo suivante"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+              <div class="carousel-dots">
+                <button class="carousel-dot active" type="button" aria-label="Photo 1"></button>
+              </div>
             </div>
             <div class="fleet-body">
               <div class="fleet-badge">Groupe · Confort</div>
@@ -1788,9 +1817,14 @@
           <div class="fleet-card reveal d3">
             <div class="fleet-img-wrap">
               <div class="fleet-shimmer"></div>
-              <img class="fleet-img"
-                src="https://source.unsplash.com/700x420/?mercedes,c-class,black,sedan,dark"
-                alt="Mercedes Classe C Noire" />
+              <div class="carousel-track">
+                <img class="fleet-img" src="https://source.unsplash.com/700x420/?mercedes,c-class,black,sedan,dark" alt="Mercedes Classe C Noire" />
+              </div>
+              <button class="carousel-arrow carousel-prev" type="button" aria-label="Photo précédente"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button class="carousel-arrow carousel-next" type="button" aria-label="Photo suivante"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+              <div class="carousel-dots">
+                <button class="carousel-dot active" type="button" aria-label="Photo 1"></button>
+              </div>
             </div>
             <div class="fleet-body">
               <div class="fleet-badge">Affaires · Élégance</div>
@@ -2233,6 +2267,32 @@
       });
     }
 
+    /* ── Fleet photo carousels ── */
+    function initFleetCarousels() {
+      document.querySelectorAll('.fleet-img-wrap').forEach(wrap => {
+        const track = wrap.querySelector('.carousel-track');
+        const prev  = wrap.querySelector('.carousel-prev');
+        const next  = wrap.querySelector('.carousel-next');
+        const dots  = wrap.querySelectorAll('.carousel-dot');
+        const slides = track ? track.children : [];
+        if (!track || slides.length <= 1) {
+          if (prev) prev.style.display = 'none';
+          if (next) next.style.display = 'none';
+          if (dots.length) dots.forEach(d => d.style.display = 'none');
+          return;
+        }
+        let index = 0;
+        function goTo(i) {
+          index = (i + slides.length) % slides.length;
+          track.style.transform = `translateX(-${index * 100}%)`;
+          dots.forEach((d, di) => d.classList.toggle('active', di === index));
+        }
+        prev.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); goTo(index - 1); });
+        next.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); goTo(index + 1); });
+        dots.forEach((d, di) => d.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); goTo(di); }));
+      });
+    }
+
     /* ── Cursor spotlight ── */
     function initCursor() {
       const spot = document.getElementById('cursor-spotlight');
@@ -2265,6 +2325,7 @@
       initParticles();
       initHero();
       initTilt();
+      initFleetCarousels();
       initCursor();
       document.querySelector('.nav-logo').addEventListener('click', closeMenu);
     });
