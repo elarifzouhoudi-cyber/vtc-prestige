@@ -617,15 +617,16 @@
       filter: saturate(.9) brightness(.95);
       transform: scale(1.03);
     }
-    .fleet-img.tesla-img {
-      object-fit: contain;
-      background: radial-gradient(ellipse at center, #f2ede1 0%, #e2d9c2 100%);
-      padding: 1.2rem;
-      filter: none;
+    .fleet-img-wrap.tesla-split {
+      display: flex;
+      height: 220px;
     }
-    .fleet-card:hover .tesla-img {
-      filter: none;
-      transform: scale(1.03);
+    .fleet-img-wrap.tesla-split .fleet-img {
+      width: 50%;
+      height: 100%;
+    }
+    .fleet-img-wrap.tesla-split .fleet-img:first-child {
+      border-right: 2px solid var(--bg-card);
     }
     .fleet-img-wrap { overflow: hidden; }
     .fleet-body { padding: 2rem; }
@@ -1075,6 +1076,7 @@
       .form-card { padding: 1.8rem 1.2rem; }
       .fleet-grid { max-width: 100%; }
       .fleet-img { height: 190px; }
+      .fleet-img-wrap.tesla-split { height: 190px; }
       .menu-nav-list a { font-size: clamp(1.6rem, 7vw, 2.8rem); }
       .btn-primary, .btn-outline, .btn-whatsapp { padding: .8rem 1.8rem; font-size: .75rem; width: 100%; text-align: center; justify-content: center; }
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -1721,18 +1723,21 @@
         </p>
         <div class="fleet-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
 
-          <!-- Tesla Model Y Noire -->
+          <!-- Tesla Model 3 Noire -->
           <div class="fleet-card reveal d1">
-            <div class="fleet-img-wrap">
+            <div class="fleet-img-wrap tesla-split">
               <div class="fleet-shimmer"></div>
-              <img class="fleet-img tesla-img"
-                src="img/tesla-model-y.png"
-                alt="Tesla Model Y Noire" />
+              <img class="fleet-img"
+                src="img/tesla-model-3-exterieur.jpg"
+                alt="Tesla Model 3 Noire — extérieur" />
+              <img class="fleet-img"
+                src="img/tesla-model-3-interieur.jpg"
+                alt="Tesla Model 3 Noire — intérieur" />
             </div>
             <div class="fleet-body">
               <div class="fleet-badge">Électrique · Prestige</div>
-              <h3 class="fleet-name">Tesla Model Y</h3>
-              <p class="fleet-desc">Technologie de pointe, silencieuse et puissante. Autonomie exceptionnelle, habitacle futuriste, autopilot avancé. SUV noir laqué, intérieur cuir sombre.</p>
+              <h3 class="fleet-name">Tesla Model 3</h3>
+              <p class="fleet-desc">Technologie de pointe, silencieuse et puissante. Autonomie exceptionnelle, habitacle épuré, autopilot avancé. Noir laqué, intérieur cuir sombre et bois clair.</p>
               <div class="fleet-specs">
                 <div class="fleet-spec">
                   <span class="fleet-spec-val">4</span>
