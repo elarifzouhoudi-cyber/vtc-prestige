@@ -333,6 +333,7 @@
     }
 
     .btn-whatsapp {
+      position: relative;
       display: inline-flex;
       align-items: center;
       gap: .65rem;
@@ -349,12 +350,81 @@
       text-transform: uppercase;
       text-decoration: none;
       transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      animation: whatsappGlow 2.6s ease-in-out infinite;
     }
-    .btn-whatsapp svg { width: 18px; height: 18px; fill: #fff; flex-shrink: 0; }
+    .btn-whatsapp svg {
+      width: 18px; height: 18px;
+      fill: #fff;
+      flex-shrink: 0;
+      animation: whatsappRing 2.6s ease-in-out infinite;
+      transform-origin: center;
+    }
     .btn-whatsapp:hover {
       background: #1fb956;
       transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(37,211,102,.35);
+      box-shadow: 0 12px 40px rgba(37,211,102,.5);
+      animation-play-state: paused;
+    }
+    .btn-whatsapp-lg {
+      padding: 1.05rem 2.6rem;
+      font-size: .88rem;
+    }
+    .btn-whatsapp-lg svg { width: 20px; height: 20px; }
+    @keyframes whatsappGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,.55); }
+      50%      { box-shadow: 0 0 0 12px rgba(37,211,102,0); }
+    }
+    @keyframes whatsappRing {
+      0%, 8%, 100% { transform: rotate(0deg); }
+      3%           { transform: rotate(-14deg); }
+      6%           { transform: rotate(10deg); }
+    }
+
+    /* ─── FLOATING WHATSAPP BUTTON ───────────────────────── */
+    .whatsapp-float {
+      position: fixed;
+      right: 1.6rem;
+      bottom: 1.6rem;
+      z-index: 800;
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .whatsapp-float svg {
+      width: 30px; height: 30px;
+      fill: #fff;
+      position: relative;
+      z-index: 2;
+      animation: whatsappRing 2.6s ease-in-out infinite;
+    }
+    .whatsapp-float::before,
+    .whatsapp-float::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #25D366;
+      z-index: 1;
+      animation: whatsappRipple 2.4s ease-out infinite;
+    }
+    .whatsapp-float::after { animation-delay: 1.2s; }
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+      box-shadow: 0 14px 36px rgba(37,211,102,.5);
+    }
+    @keyframes whatsappRipple {
+      0%   { transform: scale(1);   opacity: .55; }
+      100% { transform: scale(1.9); opacity: 0; }
+    }
+    @media (max-width: 600px) {
+      .whatsapp-float { width: 52px; height: 52px; right: 1.1rem; bottom: 1.1rem; }
+      .whatsapp-float svg { width: 26px; height: 26px; }
     }
 
     .hero-scroll {
@@ -599,36 +669,6 @@
       letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--gray-3);
-    }
-
-    /* ─── RESERVATION ────────────────────────────────────── */
-    .reservation-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-      margin-top: 4rem;
-    }
-    .reservation-info p {
-      color: var(--gray-2);
-      line-height: 1.8;
-      font-size: .92rem;
-      margin-bottom: 2rem;
-    }
-    .res-features { list-style: none; display: flex; flex-direction: column; gap: .8rem; }
-    .res-features li {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      font-size: .88rem;
-      color: var(--gray-1);
-    }
-    .res-features li::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--gold);
-      border-radius: 50%;
-      flex-shrink: 0;
     }
 
     .form-card {
@@ -1011,7 +1051,6 @@
       .nav { padding: 1.2rem 1.5rem; }
       .nav.scrolled { padding: .9rem 1.5rem; }
       .stats-inner { grid-template-columns: 1fr 1fr; }
-      .reservation-wrap,
       .about-grid,
       .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
       .about-img-wrap { display: none; }
@@ -1037,9 +1076,8 @@
       .fleet-grid { max-width: 100%; }
       .fleet-img { height: 190px; }
       .menu-nav-list a { font-size: clamp(1.6rem, 7vw, 2.8rem); }
-      .btn-primary, .btn-outline { padding: .8rem 1.8rem; font-size: .75rem; width: 100%; text-align: center; }
+      .btn-primary, .btn-outline, .btn-whatsapp { padding: .8rem 1.8rem; font-size: .75rem; width: 100%; text-align: center; justify-content: center; }
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .reservation-wrap { gap: 2rem; }
       .hero-scroll { bottom: 4rem; }
       .zones-grid { grid-template-columns: 1fr 1fr; }
     }
@@ -1275,6 +1313,11 @@
   <!-- Cursor spotlight -->
   <div id="cursor-spotlight"></div>
 
+  <!-- ══════════════════ WHATSAPP FLOTTANT ══════════════════ -->
+  <a href="tel:+33658500439" class="whatsapp-float" aria-label="Appeler sur WhatsApp">
+    <svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>
+  </a>
+
   <!-- ══════════════════ NAVIGATION ══════════════════ -->
   <nav class="nav" id="mainNav">
     <a class="nav-logo" href="#" onclick="showPage('accueil')">
@@ -1295,7 +1338,7 @@
       <li><a href="#" onclick="showPage('apropos')"   class="menu-link" data-page="apropos">À Propos</a></li>
       <li><a href="#" onclick="showPage('services')"  class="menu-link" data-page="services">Services</a></li>
       <li><a href="#" onclick="showPage('flotte')"    class="menu-link" data-page="flotte">Notre Flotte</a></li>
-      <li><a href="#" onclick="showPage('reservation')" class="menu-link" data-page="reservation">Réservation</a></li>
+      <li><a href="tel:+33658500439" class="menu-link">Réserver sur WhatsApp</a></li>
       <li><a href="#" onclick="showPage('contact')"   class="menu-link" data-page="contact">Contact</a></li>
       <li><a href="#" onclick="showPage('zones')"    class="menu-link" data-page="zones">Zones Desservies</a></li>
     </ul>
@@ -1320,9 +1363,7 @@
         <h1 class="hero-title shimmer-text">L'élégance au service<br/>de votre <em>trajet</em></h1>
         <p class="hero-sub">Une expérience de transport haut de gamme, alliant confort absolu, ponctualité irréprochable et discrétion totale.</p>
         <div class="hero-cta">
-          <a href="#" class="btn-primary" onclick="showPage('reservation')">Réserver un trajet</a>
-          <a href="#" class="btn-outline" onclick="showPage('flotte')">Découvrir la flotte</a>
-          <a href="tel:+33658500439" class="btn-whatsapp"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>06 58 50 04 39</a>
+          <a href="tel:+33658500439" class="btn-whatsapp btn-whatsapp-lg"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>Réserver sur WhatsApp — 06 58 50 04 39</a>
         </div>
       </div>
       <div class="hero-location">
@@ -1478,9 +1519,8 @@
     <section class="cta-band">
       <div class="section-label reveal">Réservation</div>
       <h2 class="reveal d1">Prêt à vivre une expérience<br/>de transport <em>hors du commun ?</em></h2>
-      <div class="reveal d2" style="display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap">
-        <a href="#" class="btn-primary" onclick="showPage('reservation')">Réserver maintenant</a>
-        <a href="tel:+33658500439" class="btn-whatsapp"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>06 58 50 04 39</a>
+      <div class="reveal d2" style="display:flex;justify-content:center">
+        <a href="tel:+33658500439" class="btn-whatsapp btn-whatsapp-lg"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>Réserver sur WhatsApp — 06 58 50 04 39</a>
       </div>
     </section>
 
@@ -1520,7 +1560,7 @@
               <li><a href="tel:+33658500439">06 58 50 04 39</a></li>
               <li><a href="#">contact@prestigeride.fr</a></li>
               <li><a href="#">Marseille & région PACA</a></li>
-              <li><a href="#" onclick="showPage('reservation')">Réservation</a></li>
+              <li><a href="tel:+33658500439">Réserver sur WhatsApp</a></li>
             </ul>
           </div>
         </div>
@@ -1579,9 +1619,8 @@
     <section class="cta-band">
       <div class="section-label reveal">Rejoignez-nous</div>
       <h2 class="reveal d1">Faites l'expérience du <em>transport d'exception</em></h2>
-      <div class="reveal d2" style="display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap">
-        <a href="#" class="btn-primary" onclick="showPage('reservation')">Réserver maintenant</a>
-        <a href="tel:+33658500439" class="btn-whatsapp"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>06 58 50 04 39</a>
+      <div class="reveal d2" style="display:flex;justify-content:center">
+        <a href="tel:+33658500439" class="btn-whatsapp btn-whatsapp-lg"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>Réserver sur WhatsApp — 06 58 50 04 39</a>
       </div>
     </section>
     <footer>
@@ -1656,9 +1695,8 @@
     <section class="cta-band">
       <div class="section-label reveal">Contactez-nous</div>
       <h2 class="reveal d1">Un service <em>sur mesure</em><br/>pour chaque besoin</h2>
-      <div class="reveal d2" style="display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap">
-        <a href="#" class="btn-primary" onclick="showPage('reservation')">Demander un devis</a>
-        <a href="tel:+33658500439" class="btn-whatsapp"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>06 58 50 04 39</a>
+      <div class="reveal d2" style="display:flex;justify-content:center">
+        <a href="tel:+33658500439" class="btn-whatsapp btn-whatsapp-lg"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>Réserver sur WhatsApp — 06 58 50 04 39</a>
       </div>
     </section>
     <footer>
@@ -1776,129 +1814,8 @@
     <section class="cta-band">
       <div class="section-label reveal">Embarquement</div>
       <h2 class="reveal d1">Choisissez votre véhicule<br/>et <em>réservez en ligne</em></h2>
-      <div class="reveal d2" style="display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap">
-        <a href="#" class="btn-primary" onclick="showPage('reservation')">Réserver maintenant</a>
-        <a href="tel:+33658500439" class="btn-whatsapp"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>06 58 50 04 39</a>
-      </div>
-    </section>
-    <footer>
-      <div class="footer-inner">
-        <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,.04);padding-top:2rem">
-          <p class="footer-copy">© 2025 <span>PrestigeRide</span>. Tous droits réservés.</p>
-        </div>
-      </div>
-    </footer>
-  </div>
-
-  <!-- ══════════════════ PAGE : RÉSERVATION ══════════════════ -->
-  <div class="page" id="page-reservation">
-    <div style="height:80px;background:var(--bg-deep)"></div>
-    <section class="section">
-      <div class="section-inner">
-        <div class="section-label reveal">Réservation</div>
-        <h2 class="section-title reveal d1">Réservez votre trajet<br/><em>en quelques clics</em></h2>
-        <div class="section-divider reveal d2"></div>
-        <div class="reservation-wrap">
-          <div class="reservation-info reveal-left">
-            <p>Remplissez le formulaire de réservation et nous vous confirmons votre trajet dans les plus brefs délais. Notre équipe est disponible 24h/24 pour répondre à toutes vos questions.</p>
-            <ul class="res-features">
-              <li>Confirmation par email et SMS</li>
-              <li>Paiement sécurisé en ligne ou en espèces</li>
-              <li>Modification ou annulation jusqu'à 2h avant</li>
-              <li>Suivi de votre chauffeur en temps réel</li>
-              <li>Reçu fiscal disponible sur demande</li>
-              <li>Disponible 24h/24 – 7j/7</li>
-            </ul>
-            <div style="margin-top:2.5rem">
-              <div class="section-label" style="margin-bottom:1rem">Contact Direct</div>
-              <p style="font-size:1.4rem;font-family:var(--font-serif);color:var(--gold)"><a href="tel:+33658500439" style="color:inherit;text-decoration:none">06 58 50 04 39</a></p>
-              <p style="font-size:.85rem;color:var(--gray-3);margin-top:.4rem">Réponse assurée en moins de 15 minutes</p>
-              <a href="tel:+33658500439" class="btn-whatsapp" style="margin-top:1.2rem"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>Appeler maintenant</a>
-            </div>
-          </div>
-          <div class="reveal-right">
-            <div class="form-card">
-              <h3 class="form-title">Votre Réservation</h3>
-              <form onsubmit="handleFormSubmit(event)">
-                <div class="form-row">
-                  <div class="form-group">
-                    <label>Prénom</label>
-                    <input type="text" placeholder="Jean" required />
-                  </div>
-                  <div class="form-group">
-                    <label>Nom</label>
-                    <input type="text" placeholder="Dupont" required />
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group">
-                    <label>Téléphone</label>
-                    <input type="tel" placeholder="+33 6 00 00 00 00" required />
-                  </div>
-                  <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="jean@exemple.fr" required />
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group">
-                    <label>Date du trajet</label>
-                    <input type="date" required />
-                  </div>
-                  <div class="form-group">
-                    <label>Heure de prise en charge</label>
-                    <input type="time" required />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label>Adresse de départ</label>
-                  <input type="text" placeholder="12 Rue Paradis, Marseille 13001" required />
-                </div>
-                <div class="form-group">
-                  <label>Adresse d'arrivée</label>
-                  <input type="text" placeholder="Aéroport Marseille-Provence, Terminal 1" required />
-                </div>
-                <div class="form-row">
-                  <div class="form-group">
-                    <label>Véhicule souhaité</label>
-                    <select>
-                      <option>Tesla Model Y (Noire)</option>
-                      <option>Mercedes Vito Van (Noir)</option>
-                      <option>Mercedes Classe C (Noire)</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label>Nombre de passagers</label>
-                    <select>
-                      <option>1 passager</option>
-                      <option>2 passagers</option>
-                      <option>3 passagers</option>
-                      <option>4 passagers</option>
-                      <option>5 à 7 passagers</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label>Type de prestation</label>
-                  <select>
-                    <option>Transfert Aéroport</option>
-                    <option>Voyage d'Affaires</option>
-                    <option>Mariage / Événement</option>
-                    <option>Mise à Disposition</option>
-                    <option>Longue Distance</option>
-                    <option>Autre</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label>Informations complémentaires</label>
-                  <textarea placeholder="Bagages, numéro de vol, demandes spéciales..."></textarea>
-                </div>
-                <button type="submit" class="form-submit">Envoyer ma réservation</button>
-                <p class="form-note">Vous recevrez une confirmation dans les 15 minutes.</p>
-              </form>
-            </div>
-          </div>
-        </div>
+      <div class="reveal d2" style="display:flex;justify-content:center">
+        <a href="tel:+33658500439" class="btn-whatsapp btn-whatsapp-lg"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>Réserver sur WhatsApp — 06 58 50 04 39</a>
       </div>
     </section>
     <footer>
@@ -2121,9 +2038,8 @@
 
         <div style="text-align:center;margin-top:4rem" class="reveal">
           <p style="color:var(--gray-2);font-size:.9rem;margin-bottom:2rem">Votre ville n'est pas dans la liste ? Contactez-nous pour un devis personnalisé.</p>
-          <div style="display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap">
-            <a href="#" class="btn-primary" onclick="showPage('reservation')">Demander un devis</a>
-            <a href="tel:+33658500439" class="btn-whatsapp"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>06 58 50 04 39</a>
+          <div style="display:flex;justify-content:center">
+            <a href="tel:+33658500439" class="btn-whatsapp btn-whatsapp-lg"><svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.625.86 5.055 2.315 7.02L4.999 27l5.157-1.352A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.78 9.78 0 0 1-4.98-1.363l-.357-.213-3.06.803.817-2.982-.232-.306A9.8 9.8 0 0 1 6.182 15c0-5.421 4.398-9.818 9.819-9.818S25.82 9.579 25.82 15 21.422 24.818 16.001 24.818zm5.396-7.34c-.297-.148-1.755-.866-2.027-.964-.272-.099-.47-.148-.668.148-.198.297-.767.964-.94 1.163-.173.198-.347.223-.644.075-.297-.148-1.253-.462-2.386-1.472-.882-.787-1.478-1.76-1.651-2.057-.173-.297-.019-.457.13-.605.134-.133.297-.347.446-.52.148-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.075-.148-.668-1.61-.916-2.204-.241-.579-.486-.5-.668-.51-.173-.008-.372-.01-.57-.01a1.096 1.096 0 0 0-.792.372c-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.874 1.213 3.073.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.755-.717 2.003-1.41.248-.693.248-1.287.173-1.41-.075-.124-.272-.198-.57-.347z"/></svg>Réserver sur WhatsApp — 06 58 50 04 39</a>
           </div>
         </div>
       </div>
@@ -2139,7 +2055,7 @@
 
   <!-- ══════════════════ SUCCESS TOAST ══════════════════ -->
   <div id="toast" style="
-    position:fixed;bottom:2rem;right:2rem;
+    position:fixed;bottom:6.5rem;right:2rem;
     background:var(--bg-card);
     border:1px solid var(--gold);
     color:var(--white);
